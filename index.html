@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+</head>
+<body>
+    <form id="form">
+        <input type="password" placeholder="Введите пароль" id="password"><br><br>
+        <button id="order">Зарегистрироваться</button>
+    </form>
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+        let tg = window.Telegram.Webapp;
+        let order = document.getElementById("order")
+        tg.expand();
+        order.addEventListener("click", () => {
+//            document.getElementById("password").value = tg.initDataUnsafe.user.password;
+            let password = document.getElementById("password").value;
+            let data = {
+                password: password
+            }
+            tg.sendData(JSON.stringify(data));
+            tg.close();
+            
+        })
+
+</script>
+</body>
+</html>
