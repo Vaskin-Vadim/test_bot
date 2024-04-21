@@ -12,8 +12,8 @@
 <script type="text/javascript">
     Telegram.WebApp.ready();
     Telegram.WebApp.MainButton.setText('Создать пользователя').show().onClick(function () {
-        const username = {password:document.getElementById("username").value};
-        const email = {password:document.getElementById("email").value};
+        const username = {username:document.getElementById("username").value};
+        const email = {email:document.getElementById("email").value};
         const password = {password:document.getElementById("password").value};
         const obj = { username, email, password };
         const data= JSON.stringify(obj);
