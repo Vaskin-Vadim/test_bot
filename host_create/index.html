@@ -16,7 +16,12 @@
         const port = {port:document.getElementById("port").value};
         const username = {username:document.getElementById("username").value};
         const password = {password:document.getElementById("password").value};  
-        const connection_type = { connection_type: document.getElementById("connection_type").value };
+        const method = document.querySelector('select').value;
+        if (method === 'password') {
+          const connection_type = { connection_type: document.getElementById("ssh_pass").value };
+        } else {
+          const connection_type = { connection_type: document.getElementById("ssh_key").value };
+        }
         const obj = { ip,port, username, password, connection_type };
         const data= JSON.stringify(obj);
         Telegram.WebApp.sendData(data);
@@ -31,8 +36,8 @@
             <input type="text" style="width: -webkit-fill-available;;outline: none;margin: 10px;padding: 15px 10px;font-size: 14px;border: 2px solid silver;border-radius: 5px;" placeholder="Введите Пользователя подключения" id="username">
             <input type="password" style="width: -webkit-fill-available;;outline: none;margin: 10px;padding: 15px 10px;font-size: 14px;border: 2px solid silver;border-radius: 5px;" placeholder="Введите пароль" id="password">
             <select style="width: -webkit-fill-available;;outline: none;margin: 10px;padding: 15px 10px;font-size: 14px;border: 2px solid silver;border-radius: 5px;">
-              <option value="password" id = "connection_type">Подключение по паролю</option>
-              <option value="ssh-key">Подключение по SSH ключу</option>
+              <option value="password" id="ssh_pass">Подключение по паролю</option>
+              <option value="ssh-key" id="ssh_key">Подключение по SSH ключу</option>
             </select>
           </form>
     </form>
