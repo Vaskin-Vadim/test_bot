@@ -1,32 +1,29 @@
+<!--
+    Simple static Telegram WebApp. Does not verify the WebAppInitData, as a bot token would be needed for that.
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Регистрация</title>
-</head>
-<body>
-    <form id="form">
-        <input type="password" placeholder="Введите пароль" id="password"><br><br>
-        <button id="order">Зарегистрироваться</button>
-    </form>
-
+    <title>python-telegram-bot Example WebApp</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script>
-        let tg = window.Telegram.Webapp;
-        let order = document.getElementById("order")
-        tg.expand();
-        order.addEventListener("click", () => {
-//            document.getElementById("password").value = tg.initDataUnsafe.user.password;
-            let password = document.getElementById("password").value;
-            let data = {
-                password: password
-            }
-            tg.sendData(JSON.stringify(data));
-            tg.close();
-            
-        })
-
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+</head>
+<script type="text/javascript">
+    Telegram.WebApp.ready();
+    Telegram.WebApp.MainButton.setText('Авторизоваться').show().onClick(function () {
+  const obj = {password:document.getElementById("password").value || 'test_test'};
+        const data= JSON.stringify(obj);
+        Telegram.WebApp.sendData(data);
+        Telegram.WebApp.close();
+    });
 </script>
+<body style="background-color: black;font-weight: 200;color: var(--tg-theme-text-color);background: var(--tg-theme-bg-color);">
+    <form id="form">
+        <input type="password" style="width: 90%;outline: none;margin: 10px 5%;padding: 15px 10px;font-size: 14px;border: 2px solid silver;border-radius: 5px;"placeholder="Введите пароль" id="password">
+    </form>
 </body>
+<script type="text/javascript">
+    Telegram.WebApp.expand();
+</script>
 </html>
