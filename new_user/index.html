@@ -1,0 +1,39 @@
+<!--
+    Simple static Telegram WebApp. Does not verify the WebAppInitData, as a bot token would be needed for that.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>python-telegram-bot Example WebApp</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+</head>
+<script type="text/javascript">
+    Telegram.WebApp.ready();
+    Telegram.WebApp.MainButton.setText('Создать пользователя').show().onClick(function () {
+        const user_link = {user_link:document.getElementById("user_link").value};  
+        const method = document.querySelector('select').value;
+        if (method === 'admin_user') {
+          const admin = { connection_type: document.getElementById("root_true").value };
+        } else {
+          const admin = { connection_type: document.getElementById("root_false").value };
+        }
+        const obj = { user_link, connection_type };
+        const data= JSON.stringify(obj);
+        Telegram.WebApp.sendData(data);
+        Telegram.WebApp.close();
+    });
+</script>
+<body style="background-color: black;font-weight: 200;color: var(--tg-theme-text-color);background: var(--tg-theme-bg-color);">
+    <form id="form">
+        <input type="password" style="width: -webkit-fill-available;;outline: none;margin: 10px;padding: 15px 10px;font-size: 14px;border: 2px solid silver;border-radius: 5px;" placeholder="Telegram_Link пользователя" id="user_link">
+        <select style="width: -webkit-fill-available;;outline: none;margin: 10px;padding: 15px 10px;font-size: 14px;border: 2px solid silver;border-radius: 5px;">
+          <option value="admin_user" id="root_true">Admin:True</option>
+          <option value="simple_user" id="root_false">Admin:False</option>
+        </select>
+    </form>
+</body>
+<script type="text/javascript">
+</script>
+</html>
