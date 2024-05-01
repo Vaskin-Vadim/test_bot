@@ -15,11 +15,11 @@
         const user_link = {user_link:document.getElementById("user_link").value};  
         const method = document.querySelector('select').value;
         if (method === 'admin_user') {
-          const admin = { admin: document.getElementById("root_true").value };
+          const admin_status = { admin: document.getElementById("root_true").value };
         } else {
-          const admin = { admin: document.getElementById("root_false").value };
+          const admin_status = { admin: document.getElementById("root_false").value };
         }
-        const obj = { user_link, admin };
+        const obj = { user_link, admin_status };
         const data= JSON.stringify(obj);
         Telegram.WebApp.sendData(data);
         Telegram.WebApp.close();
