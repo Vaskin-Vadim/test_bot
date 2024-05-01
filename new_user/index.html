@@ -13,13 +13,7 @@
     Telegram.WebApp.ready();
     Telegram.WebApp.MainButton.setText('Создать пользователя').show().onClick(function () {
         const user_link = {user_link:document.getElementById("user_link").value};  
-        const method = document.querySelector('select').value;
-        if (method === 'admin_user') {
-          const admin_status = { admin_status: document.getElementById("root_true").value };
-        } else {
-          const admin_status = { admin_status: document.getElementById("root_false").value };
-        }
-        const obj = { user_link, admin_status };
+        const obj = { user_link};
         const data= JSON.stringify(obj);
         Telegram.WebApp.sendData(data);
         Telegram.WebApp.close();
@@ -28,10 +22,10 @@
 <body style="background-color: black;font-weight: 200;color: var(--tg-theme-text-color);background: var(--tg-theme-bg-color);">
     <form id="form">
         <input type="password" style="width: -webkit-fill-available;;outline: none;margin: 10px;padding: 15px 10px;font-size: 14px;border: 2px solid silver;border-radius: 5px;" placeholder="Telegram_Link пользователя" id="user_link">
-        <select style="width: -webkit-fill-available;;outline: none;margin: 10px;padding: 15px 10px;font-size: 14px;border: 2px solid silver;border-radius: 5px;">
+<!--         <select style="width: -webkit-fill-available;;outline: none;margin: 10px;padding: 15px 10px;font-size: 14px;border: 2px solid silver;border-radius: 5px;">
           <option value="admin_user" id="root_true">Admin:True</option>
           <option value="simple_user" id="root_false">Admin:False</option>
-        </select>
+        </select> -->
     </form>
 </body>
 <script type="text/javascript">
