@@ -12,12 +12,13 @@
 <script type="text/javascript">
     Telegram.WebApp.ready();
     Telegram.WebApp.MainButton.setText('Создать пользователя').show().onClick(function () {
+        const server_name = {server_name:document.getElementById("server_name").value};
         const ip = {ip:document.getElementById("ip").value};
         const port = {port:document.getElementById("port").value};
         const username = {username:document.getElementById("username").value};
         const password = {password:document.getElementById("password").value};  
         const connection_type = {connection_type:document.getElementById("connection_type").value};
-        const obj = { ip,port, username, password, connection_type };
+        const obj = { server_name,ip,port, username, password, connection_type };
         const data= JSON.stringify(obj);
         Telegram.WebApp.sendData(data);
         Telegram.WebApp.close();
@@ -26,6 +27,7 @@
 <body style="background-color: black;font-weight: 200;color: var(--tg-theme-text-color);background: var(--tg-theme-bg-color);">
     <form id="form">
         <form id="form">
+            <input type="text" style="width: -webkit-fill-available;;outline: none;margin: 10px;padding: 15px 10px;font-size: 14px;border: 2px solid silver;border-radius: 5px;" placeholder="Введите название сервера" id="server_name">
             <input type="text" style="width: -webkit-fill-available;;outline: none;margin: 10px;padding: 15px 10px;font-size: 14px;border: 2px solid silver;border-radius: 5px;" placeholder="Введите IP сервера" id="ip">
             <input type="text" style="width: -webkit-fill-available;;outline: none;margin: 10px;padding: 15px 10px;font-size: 14px;border: 2px solid silver;border-radius: 5px;" placeholder="Введите Введите порт подключения" id="port">
             <input type="text" style="width: -webkit-fill-available;;outline: none;margin: 10px;padding: 15px 10px;font-size: 14px;border: 2px solid silver;border-radius: 5px;" placeholder="Введите Пользователя подключения" id="username">
