@@ -16,7 +16,7 @@
         const port = {port:document.getElementById("port").value};
         const username = {username:document.getElementById("username").value};
         const password = {password:document.getElementById("password").value};  
-        const connection_type = {root:document.getElementById("connection_type").value};
+        const connection_type = {connection_type:document.getElementById("connection_type").value};
         const obj = { ip,port, username, password, connection_type };
         const data= JSON.stringify(obj);
         Telegram.WebApp.sendData(data);
