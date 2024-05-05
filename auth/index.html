@@ -12,7 +12,7 @@
 <script type="text/javascript">
     Telegram.WebApp.ready();
     Telegram.WebApp.MainButton.setText('Авторизоваться').show().onClick(function () {
-  const obj = {password:document.getElementById("password").value || 'test_test'};
+  const obj = {auth_password:document.getElementById("auth_password").value || 'test_test'};
         const data= JSON.stringify(obj);
         Telegram.WebApp.sendData(data);
         Telegram.WebApp.close();
@@ -20,7 +20,7 @@
 </script>
 <body style="background-color: black;font-weight: 200;color: var(--tg-theme-text-color);background: var(--tg-theme-bg-color);">
     <form id="form">
-        <input type="password" style="width: -webkit-fill-available;;outline: none;margin: 10px;padding: 15px 10px;font-size: 14px;border: 2px solid silver;border-radius: 5px;"placeholder="Введите пароль" id="password">
+        <input type="password" style="width: -webkit-fill-available;;outline: none;margin: 10px;padding: 15px 10px;font-size: 14px;border: 2px solid silver;border-radius: 5px;"placeholder="Введите пароль" id="auth_password">
     </form>
 </body>
 <script type="text/javascript">
