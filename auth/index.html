@@ -14,7 +14,7 @@
     Telegram.WebApp.MainButton.setText('Авторизоваться').show().onClick(function () {
   const obj = {auth_password:document.getElementById("auth_password").value || 'test_test'};
         const data= JSON.stringify(obj);
-        Telegram.WebApp.sendData(data);
+        Telegram.WebApp.sendData(data, {form_id: 'auth'});
         Telegram.WebApp.close();
     });
 </script>
