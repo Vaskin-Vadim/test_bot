@@ -37,10 +37,10 @@
             const user_pass = urlParams.get('user_pass');
             const auth_password = document.getElementById("auth_password").value;
 
-            if (auth_password !== user_pass) {
+            if (auth_password.trim() !== user_pass.trim()) {
                 showError("Неправильный пароль");
-                return;
-            }
+            return;
+}
 
             const obj = {
                 auth_password: { auth_password }
