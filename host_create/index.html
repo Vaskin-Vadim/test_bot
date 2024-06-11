@@ -27,12 +27,12 @@
             return;
         }
 
-        if (ip.value.length === 0 || !ip.validity.patternMismatch) {
+        if (ip.value.length === 0 || ip.validity.patternMismatch) {
             alert("Введите корректный IP-адрес");
             return;
         }
 
-        if (port.value.length === 0 || !port.validity.patternMismatch) {
+        if (port.value.length === 0 || port.validity.patternMismatch) {
             alert("Введите корректный номер порта (от 1 до 65535)");
             return;
         }
@@ -53,6 +53,8 @@
         Telegram.WebApp.sendData(data);
         Telegram.WebApp.close();
     }
+</script>
+</body>
 </script>
 <body style="background-color: black;font-weight: 200;color: var(--tg-theme-text-color);background: var(--tg-theme-bg-color);">
     <form id="form" onsubmit="event.preventDefault(); validateForm();">
