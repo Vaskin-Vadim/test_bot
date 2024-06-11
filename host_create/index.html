@@ -16,11 +16,12 @@
     });
 
     function validateForm() {
-        const server_name = document.getElementById("server_name");
-        const ip = document.getElementById("ip");
-        const port = document.getElementById("port");
-        const username = document.getElementById("username");
-        const password = document.getElementById("password");
+        const server_name = {server_name:document.getElementById("server_name").value};
+        const ip = {ip:document.getElementById("ip").value};
+        const port = {port:document.getElementById("port").value};
+        const username = {username:document.getElementById("username").value};
+        const password = {password:document.getElementById("password").value};  
+
 
         if (server_name.value.length === 0 || server_name.value.length > server_name.maxLength) {
             alert("Введите корректное название сервера (не более " + server_name.maxLength + " символов)");
