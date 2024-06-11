@@ -35,9 +35,9 @@
             const urlParams = new URLSearchParams(window.location.search);
             const user_pass = urlParams.get('user_pass');
             const auth_password = document.getElementById("auth_password").value;
-            const obj = {
-                auth_password: { auth_password }
-            };
+            const obj = 
+                { auth_password }
+            ;
             const data = JSON.stringify(obj);
             Telegram.WebApp.sendData(data);
             Telegram.WebApp.close();
