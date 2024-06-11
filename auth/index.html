@@ -58,7 +58,7 @@
         Telegram.WebApp.MainButton.setText('Авторизоваться').show().onClick(sendData);
 
         // Отлов нажатия Enter в input
-        document.getElementById('newserverpassword').addEventListener('keydown', function(event) {
+        document.getElementById('auth_password').addEventListener('keydown', function(event) {
             if (event.key === 'Enter') {
                 event.preventDefault(); // Предотвращаем стандартное поведение Enter, чтобы форма не отправлялась
                 sendData();
