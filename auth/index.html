@@ -8,19 +8,68 @@
     <title>python-telegram-bot Example WebApp</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+    <style>
+        button {
+            background-color: #4e54c8;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #3b40a4;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <script type="text/javascript">
-    Telegram.WebApp.ready();
-    Telegram.WebApp.MainButton.setText('Авторизоваться').show().onClick(function () {
-  const obj = {auth_password:document.getElementById("auth_password").value || 'test_test'};
-        const data= JSON.stringify(obj);
-        Telegram.WebApp.sendData(data, {form_id: 'auth'});
-        Telegram.WebApp.close();
+    document.addEventListener("DOMContentLoaded", function() {
+        // Подготовка Telegram WebApp
+        Telegram.WebApp.ready();
+
+        const sendData = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const user_pass = urlParams.get('user_pass');
+            const auth_password = document.getElementById("auth_password").value;
+
+            if (auth_password != user_pass) {
+                showError("Неправильный пароль");
+                return;
+            }
+
+            const obj = {
+                auth_password: { auth_password }
+            };
+            const data = JSON.stringify(obj);
+            Telegram.WebApp.sendData(data);
+            Telegram.WebApp.close();
+        };
+
+        const showError = function(message) {
+            const errorElement = document.getElementById("error");
+            errorElement.textContent = message;
+        };
+
+        Telegram.WebApp.MainButton.setText('Авторизоваться').show().onClick(sendData);
+
+        // Отлов нажатия Enter в input
+        document.getElementById('newserverpassword').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Предотвращаем стандартное поведение Enter, чтобы форма не отправлялась
+                sendData();
+            }
+        });
     });
 </script>
 <body style="background-color: black;font-weight: 200;color: var(--tg-theme-text-color);background: var(--tg-theme-bg-color);">
     <form id="form">
         <input type="password" style="width: -webkit-fill-available;;outline: none;margin: 10px;padding: 15px 10px;font-size: 14px;border: 2px solid silver;border-radius: 5px;"placeholder="Введите пароль" id="auth_password">
+        <div id="error" class="error"></div>
     </form>
 </body>
 <script type="text/javascript">
