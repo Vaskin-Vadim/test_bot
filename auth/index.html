@@ -31,30 +31,16 @@
     document.addEventListener("DOMContentLoaded", function() {
         // Подготовка Telegram WebApp
         Telegram.WebApp.ready();
-
         const sendData = function() {
             const urlParams = new URLSearchParams(window.location.search);
             const user_pass = urlParams.get('user_pass');
             const auth_password = document.getElementById("auth_password").value;
-            // Отладочный вывод через alert
-            alert("user_pass (из URL): " + user_pass);
-            alert("auth_password (из поля ввода): " + auth_password);
-            if (auth_password.trim() !== user_pass.trim()) {
-                showError("Неправильный пароль");
-            return;
-}
-
             const obj = {
                 auth_password: { auth_password }
             };
             const data = JSON.stringify(obj);
             Telegram.WebApp.sendData(data);
             Telegram.WebApp.close();
-        };
-
-        const showError = function(message) {
-            const errorElement = document.getElementById("error");
-            errorElement.textContent = message;
         };
 
         Telegram.WebApp.MainButton.setText('Авторизоваться').show().onClick(sendData);
