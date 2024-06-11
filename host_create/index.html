@@ -12,31 +12,59 @@
 <script type="text/javascript">
     Telegram.WebApp.ready();
     Telegram.WebApp.MainButton.setText('Создать пользователя').show().onClick(function () {
-        const server_name = {server_name:document.getElementById("server_name").value};
-        const ip = {ip:document.getElementById("ip").value};
-        const port = {port:document.getElementById("port").value};
-        const username = {username:document.getElementById("username").value};
-        const password = {password:document.getElementById("password").value};  
+        validateForm();
+    });
+
+    function validateForm() {
+        const server_name = document.getElementById("server_name");
+        const ip = document.getElementById("ip");
+        const port = document.getElementById("port");
+        const username = document.getElementById("username");
+        const password = document.getElementById("password");
+
+        if (server_name.value.length === 0 || server_name.value.length > server_name.maxLength) {
+            alert("Введите корректное название сервера (не более " + server_name.maxLength + " символов)");
+            return;
+        }
+
+        if (ip.value.length === 0 || !ip.validity.patternMismatch) {
+            alert("Введите корректный IP-адрес");
+            return;
+        }
+
+        if (port.value.length === 0 || !port.validity.patternMismatch) {
+            alert("Введите корректный номер порта (от 1 до 65535)");
+            return;
+        }
+
+        if (username.value.length === 0 || username.value.length > username.maxLength) {
+            alert("Введите корректное имя пользователя (не более " + username.maxLength + " символов)");
+            return;
+        }
+
+        if (password.value.length === 0 || password.value.length > password.maxLength) {
+            alert("Введите корректный пароль (не более " + password.maxLength + " символов)");
+            return;
+        }
+
         const connection_type = {connection_type:document.getElementById("connection_type").value};
-        const obj = { server_name,ip,port, username, password, connection_type };
+        const obj = { server_name: server_name.value, ip: ip.value, port: port.value, username: username.value, password: password.value, connection_type: connection_type.connection_type };
         const data= JSON.stringify(obj);
         Telegram.WebApp.sendData(data);
         Telegram.WebApp.close();
-    });
+    }
 </script>
 <body style="background-color: black;font-weight: 200;color: var(--tg-theme-text-color);background: var(--tg-theme-bg-color);">
-    <form id="form">
-        <form id="form">
-            <input type="text" style="width: -webkit-fill-available;;outline: none;margin: 10px;padding: 15px 10px;font-size: 14px;border: 2px solid silver;border-radius: 5px;" placeholder="Введите название сервера" id="server_name">
-            <input type="text" style="width: -webkit-fill-available;;outline: none;margin: 10px;padding: 15px 10px;font-size: 14px;border: 2px solid silver;border-radius: 5px;" placeholder="Введите IP сервера" id="ip">
-            <input type="text" style="width: -webkit-fill-available;;outline: none;margin: 10px;padding: 15px 10px;font-size: 14px;border: 2px solid silver;border-radius: 5px;" placeholder="Введите Введите порт подключения" id="port">
-            <input type="text" style="width: -webkit-fill-available;;outline: none;margin: 10px;padding: 15px 10px;font-size: 14px;border: 2px solid silver;border-radius: 5px;" placeholder="Введите Пользователя подключения" id="username">
-            <input type="password" style="width: -webkit-fill-available;;outline: none;margin: 10px;padding: 15px 10px;font-size: 14px;border: 2px solid silver;border-radius: 5px;" placeholder="Введите пароль" id="password">
-            <select id="connection_type" style="width: -webkit-fill-available;;outline: none;margin: 10px;padding: 15px 10px;font-size: 14px;border: 2px solid silver;border-radius: 5px;">
-              <option value="password" id="ssh_pass">Подключение по паролю</option>
-              <option value="ssh-key" id="ssh_key">Подключение по SSH ключу</option>
-            </select>
-          </form>
+    <form id="form" onsubmit="event.preventDefault(); validateForm();">
+        <input type="text" style="width: -webkit-fill-available;;outline: none;margin: 10px;padding: 15px 10px;font-size: 14px;border: 2px solid silver;border-radius: 5px;" placeholder="Введите название сервера" id="server_name" maxlength="50">
+        <input type="text" style="width: -webkit-fill-available;;outline: none;margin: 10px;padding: 15px 10px;font-size: 14px;border: 2px solid silver;border-radius: 5px;" placeholder="Введите IP сервера" id="ip" pattern="^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$" title="Введите корректный IP-адрес">
+        <input type="text" style="width: -webkit-fill-available;;outline: none;margin: 10px;padding: 15px 10px;font-size: 14px;border: 2px solid silver;border-radius: 5px;" placeholder="Введите Введите порт подключения" id="port" pattern="^[0-9]{1,5}$" title="Введите корректный номер порта (от 1 до 65535)">
+        <input type="text" style="width: -webkit-fill-available;;outline: none;margin: 10px;padding: 15px 10px;font-size: 14px;border: 2px solid silver;border-radius: 5px;" placeholder="Введите Пользователя подключения" id="username" maxlength="50">
+        <input type="password" style="width: -webkit-fill-available;;outline: none;margin: 10px;padding: 15px 10px;font-size: 14px;border: 2px solid silver;border-radius: 5px;" placeholder="Введите пароль" id="password" maxlength="50">
+        <select id="connection_type" style="width: -webkit-fill-available;;outline: none;margin: 10px;padding: 15px 10px;font-size: 14px;border: 2px solid silver;border-radius: 5px;">
+          <option value="password" id="ssh_pass">Подключение по паролю</option>
+          <option value="ssh-key" id="ssh_key">Подключение по SSH ключу</option>
+        </select>
     </form>
 </body>
 <script type="text/javascript">
