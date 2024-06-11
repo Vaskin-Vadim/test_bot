@@ -48,7 +48,7 @@
         }
 
         const connection_type = {connection_type:document.getElementById("connection_type").value};
-        const obj = { server_name: server_name.value, ip: ip.value, port: port.value, username: username.value, password: password.value, connection_type: connection_type.connection_type };
+        const obj = { server_name,ip,port, username, password, connection_type };
         const data= JSON.stringify(obj);
         Telegram.WebApp.sendData(data);
         Telegram.WebApp.close();
